@@ -13,7 +13,7 @@ def get_user_email(service: Resource):
     return profile['emailAddress']
 
 
-def create_message(sender: str,
+def encode_message(sender: str,
                    to: str,
                    subject: str,
                    message_text: str) -> str:
@@ -80,7 +80,7 @@ def send_mail_alert(email_content: dict[str,str],
     try:
         service = build("gmail", "v1", credentials=credentials)
         user_email = get_user_email(service)
-        raw_message = create_message(user_email,
+        raw_message = encode_message(user_email,
                                      f"{user_email[:-10]}+spending_alert@gmail.com",
                                      email_content["subject"],
                                      email_content["body"])
