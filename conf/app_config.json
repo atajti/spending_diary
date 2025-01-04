@@ -1,0 +1,7 @@
+{
+    "scopes":["https://www.googleapis.com/auth/spreadsheets.readonly"],
+    "oauth_json_path": "secrets/oauth_client.json",
+    "token_path": "secrets/token.json",
+    "sheet_info": "conf/sheets_conf.json",
+    "limit_info": "conf/limits.json"
+}
