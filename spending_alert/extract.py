@@ -75,7 +75,7 @@ def get_values_from_sheet(creds: Credentials,
                       .execute()
         values = result.get("values", [])
     except HttpError as err:
-        raise(err)
+        raise err
 
     return values
 

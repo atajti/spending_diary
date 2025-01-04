@@ -1,13 +1,12 @@
 import spending_alert.extract as ex
 import spending_alert.analyze as an
 import spending_alert.send_alert as sa
-from pprint import pprint
-
 
 
 def main():
-    """Gets values from GSheet.
-    """
+    """Gets values from spending sheet,
+    compares to limits json,
+    sends email of ove budget."""
 
     app_config = ex.get_config("conf/app_config.json")
     credential = ex.authenticate(app_config)
@@ -25,9 +24,7 @@ def main():
                                                        app_config["limit_info"])
     if len(overspent_categories):
         email_content = an.generate_email(overspent_categories)
-        pprint(email_content)
-        #sa.send_email(get_user_email,
-        #              email_content)
+        sa.send_mail_alert(email_content, credential)
         
 
 if __name__ == "__main__":
