@@ -1,7 +1,9 @@
 import base64
+import requests
 from googleapiclient.discovery import build, Resource
 from google.oauth2.credentials import Credentials
 from email.mime.text import MIMEText
+
 
 
 def get_user_email(service: Resource):
@@ -88,3 +90,19 @@ def send_mail_alert(email_content: dict[str,str],
         move_to_inbox(service, inserted_message["id"])
     except Exception as error:
         raise error
+
+
+def send_ntfy_notification(message: str,
+                           topic: str = "spending_alert_test"):
+    """Send a message to a ntfy topic
+    !! WARNING: free tier, for personal use only !!
+    :param message: message to display in notification
+    :param topic: topic to use
+    """
+    try:
+        r = requests.post(f"https://ntfy.sh/{topic}",
+                      data = message.encode(encoding='utf-8'))
+        r.raise_for_status()
+    except Exception as error:
+        raise error
+    

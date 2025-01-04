@@ -24,7 +24,8 @@ def main():
                                                        app_config["limit_info"])
     if len(overspent_categories):
         email_content = an.generate_email(overspent_categories)
-        sa.send_mail_alert(email_content, credential)
+        #sa.send_mail_alert(email_content, credential)
+        sa.send_ntfy_notification(message=email_content["body"])
         
 
 if __name__ == "__main__":
